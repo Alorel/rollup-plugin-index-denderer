@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es2019",
+    "rootDir": "./packages",
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "declaration": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "stripInternal": true,
+    "importHelpers": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "paths": {
+      "@alorel/rollup-plugin-index-renderer-core": [
+        "packages/core/index.ts"
+      ],
+      "@alorel/rollup-plugin-index-renderer-systemjs": [
+        "packages/systemjs/index.ts"
+      ],
+      "@alorel/rollup-plugin-index-renderer-requirejs": [
+        "packages/requirejs/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "packages"
+  ]
+}

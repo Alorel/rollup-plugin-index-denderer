@@ -1,0 +1,50 @@
+{
+  "name": "index-renderer",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Rollup plugin for rendering index.pug",
+  "main": "index.js",
+  "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
+  "author": "Arturas Molcanovas <a.molcanovas@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "del-cli dist",
+    "build": "tsc",
+    "copy": "node build/copy-files",
+    "pack-each": "node build/pack-each",
+    "watch": "yarn run build --watch",
+    "release": "semantic-release",
+    "lint": "tslint -s node_modules/custom-tslint-formatters/formatters -t grouped -p .",
+    "lint:fix": "yarn run lint --fix"
+  },
+  "workspaces": [
+    "dist/*"
+  ],
+  "peerDependencies": {
+    "rollup": "^2.6.0 || ^1.30.0"
+  },
+  "devDependencies": {
+    "@alorel-personal/tslint-rules": "^5.0.7",
+    "@types/node": ">=13.13.1",
+    "cross-spawn": "^7.0.2",
+    "custom-tslint-formatters": "^2.4.0",
+    "del-cli": "^3.0.0",
+    "fs-extra": "^9.0.0",
+    "glob": "^7.1.6",
+    "lazy-get-decorator": "^2.2.0",
+    "rollup": "^2.6.1",
+    "tslib": "^1.11.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.8.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/alorel"
+  },
+  "dependencies": {
+    "@types/pug": "^2.0.0",
+    "pug": "^2.0.4"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@alorel/rollup-plugin-index-renderer-systemjs",
+  "version": "0.0.1",
+  "description": "Rollup plugin for rendering index.pug in systemjs format",
+  "main": "index.js",
+  "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
+  "author": "Arturas Molcanovas <a.molcanovas@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "rollup": "^2.6.0 || ^1.30.0",
+    "systemjs": "^6.0.0"
+  },
+  "dependencies": {
+    "@alorel/rollup-plugin-index-renderer-core": "../core",
+    "@types/node": ">=13.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/alorel"
+  }
+}
