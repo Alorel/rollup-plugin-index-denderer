@@ -1,0 +1,7 @@
+{
+  "extends": "./node_modules/@alorel-personal/tslint-rules/tslint.json",
+  "rules": {
+    "prefer-conditional-expression": false,
+    "no-unbound-method": false
+  }
+}

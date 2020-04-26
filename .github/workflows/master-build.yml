@@ -1,0 +1,101 @@
+name: Master Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+        node:
+          - 13.x
+          - 12.x
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - name: Cache yarn
+        uses: actions/cache@v1
+        with:
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ github.ref }}-yarn
+          path: .yarn/cache
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ github.ref }}-node_modules
+          path: node_modules
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com/alorel
+      - run: npm install -g yarn@^2.0.0-rc.27
+      - run: yarn install
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: 'false'
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn run lint
+        name: Lint
+        if: ${{ matrix.node == '13.x' && matrix.os == 'ubuntu-latest'}}
+      - name: Dry release
+        run: yarn run release --dry-run
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clean
+        if: ${{ matrix.os != 'ubuntu-latest' }}
+        run: yarn run clean
+      - name: Build
+        if: ${{ matrix.os != 'ubuntu-latest' }}
+        run: yarn run build
+      - name: Sync
+        if: ${{ matrix.os != 'ubuntu-latest' }}
+        run: yarn run sync
+      - name: Copy
+        if: ${{ matrix.os != 'ubuntu-latest' }}
+        run: yarn run copy
+
+  release:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout
+        with:
+          fetch-depth: 100
+      - name: Cache yarn
+        uses: actions/cache@v1
+        with:
+          key: ubuntu-latest-13.x-${{ github.ref }}-yarn
+          path: .yarn/cache
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          key: ubuntu-latest-13.x-${{ github.ref }}-node_modules
+          path: node_modules
+      - uses: actions/setup-node@v1
+        name: Set up node
+        with:
+          node-version: 13.x
+          registry-url: https://npm.pkg.github.com/alorel
+      - run: npm install -g yarn@^2.0.0-rc.27
+        name: Set up yarn
+      - run: yarn install
+        name: Yarn install
+        env:
+          YARN_ENABLE_GLOBAL_CACHE: 'false'
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn run release
+        name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
