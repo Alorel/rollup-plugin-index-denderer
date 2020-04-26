@@ -26,59 +26,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alorel/rollup-plugin-index-renderer-core@file:../core::locator=%40alorel%2Frollup-plugin-index-renderer-systemjs%40workspace%3Adist%2Fsystemjs":
-  version: 0.0.0
-  resolution: "@alorel/rollup-plugin-index-renderer-core@file:../core::locator=%40alorel%2Frollup-plugin-index-renderer-systemjs%40workspace%3Adist%2Fsystemjs"
-  dependencies:
-    "@types/node": ">=13.0.0"
-    "@types/pug": ^2.0.0
-    lazy-get-decorator: ^2.2.0
-    pug: ^2.0.4
-    tslib: ^1.11.0
-  peerDependencies:
-    rollup: ^2.6.0 || ^1.30.0
-  checksum: 2/a8fc5c854e00bc696894a1701ccd8288266ffed938f9a86c6caa35e1cee506306054775755b3ac65b9004d396f81cee0b602106cb91b0ed71e405232e5814f10
-  languageName: node
-  linkType: hard
-
-"@alorel/rollup-plugin-index-renderer-core@workspace:*, @alorel/rollup-plugin-index-renderer-core@workspace:dist/core":
-  version: 0.0.0-use.local
-  resolution: "@alorel/rollup-plugin-index-renderer-core@workspace:dist/core"
-  dependencies:
-    "@types/node": ">=13.0.0"
-    "@types/pug": ^2.0.0
-    lazy-get-decorator: ^2.2.0
-    pug: ^2.0.4
-    tslib: ^1.11.0
-  peerDependencies:
-    rollup: ^2.6.0 || ^1.30.0
-  languageName: unknown
-  linkType: soft
-
-"@alorel/rollup-plugin-index-renderer-requirejs@workspace:dist/requirejs":
-  version: 0.0.0-use.local
-  resolution: "@alorel/rollup-plugin-index-renderer-requirejs@workspace:dist/requirejs"
-  dependencies:
-    "@alorel/rollup-plugin-index-renderer-core": "workspace:*"
-    "@types/node": ">=13.0.0"
-  peerDependencies:
-    requirejs: ^2.0.0
-    rollup: ^2.6.0 || ^1.30.0
-  languageName: unknown
-  linkType: soft
-
-"@alorel/rollup-plugin-index-renderer-systemjs@workspace:dist/systemjs":
-  version: 0.0.0-use.local
-  resolution: "@alorel/rollup-plugin-index-renderer-systemjs@workspace:dist/systemjs"
-  dependencies:
-    "@alorel/rollup-plugin-index-renderer-core": ../core
-    "@types/node": ">=13.0.0"
-  peerDependencies:
-    rollup: ^2.6.0 || ^1.30.0
-    systemjs: ^6.0.0
-  languageName: unknown
-  linkType: soft
-
 "@babel/code-frame@npm:^7.0.0":
   version: 7.8.3
   resolution: "@babel/code-frame@npm:7.8.3"
@@ -468,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>= 8, @types/node@npm:>=13.0.0, @types/node@npm:>=13.13.1":
+"@types/node@npm:*, @types/node@npm:>= 8, @types/node@npm:>=13.13.1":
   version: 13.13.4
   resolution: "@types/node@npm:13.13.4"
   checksum: 2/dc52acb5f3d9c8577abdaf682bb85d3731a090b503e1b5abde62ba426f5d556fa655a1255ebb91cfdd36060205631eb7e7d7daf185e6ebab1ff9f6f4a0605170
@@ -6431,7 +6378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.11.0, tslib@npm:^1.11.1, tslib@npm:^1.8.0, tslib@npm:^1.8.1":
+"tslib@npm:^1.11.1, tslib@npm:^1.8.0, tslib@npm:^1.8.1":
   version: 1.11.1
   resolution: "tslib@npm:1.11.1"
   checksum: 2/d40eba08de267b2d3c458ddbf51f9010a45b8e752d3bf8c0fed63e266afc9277c6a26e65e51223335b8753f9f106aeb600e704f2a6eae05729160671a97c52e7

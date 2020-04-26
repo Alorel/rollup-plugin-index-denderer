@@ -1,6 +1,6 @@
 {
   "name": "@alorel/rollup-plugin-index-renderer-requirejs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Rollup plugin for rendering index.pug in requirejs format",
   "main": "index.js",
   "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
