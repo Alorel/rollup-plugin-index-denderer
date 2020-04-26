@@ -35,7 +35,7 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com/alorel
       - run: npm install -g yarn@^2.0.0-rc.27
-      - run: yarn install --immutable
+      - run: yarn install
         env:
           YARN_ENABLE_GLOBAL_CACHE: 'false'
           YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,7 +77,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/alorel
       - run: npm install -g yarn@^2.0.0-rc.27
         name: Set up yarn
-      - run: yarn install --immutable
+      - run: yarn install
         name: Yarn install
         env:
           YARN_ENABLE_GLOBAL_CACHE: 'false'
