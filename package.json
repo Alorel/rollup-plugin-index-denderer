@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "del-cli dist",
-    "sync": "echo todo",
+    "sync": "node build/sync",
     "build": "tsc",
     "copy": "node build/copy-files",
     "watch": "yarn run build --watch",

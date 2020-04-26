@@ -1,6 +1,6 @@
 {
   "name": "@alorel/rollup-plugin-index-renderer-systemjs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Rollup plugin for rendering index.pug in systemjs format",
   "main": "index.js",
   "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@alorel/rollup-plugin-index-renderer-core": "workspace:*",
-    "@types/node": ">=13.0.0"
+    "@types/node": ">=13.13.1"
   },
   "publishConfig": {
     "access": "public",
