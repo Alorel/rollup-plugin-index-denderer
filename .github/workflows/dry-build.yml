@@ -48,6 +48,7 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: 'false'
           YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: yarn run lint
+        name: Lint
         if: ${{ matrix.node == '13.x' && matrix.os == 'ubuntu-latest'}}
       - name: Clean
         run: yarn run clean
