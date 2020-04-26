@@ -14,7 +14,6 @@
     "sync": "echo todo",
     "build": "tsc",
     "copy": "node build/copy-files",
-    "pack-each": "node build/pack-each",
     "watch": "yarn run build --watch",
     "release": "semantic-release",
     "lint": "tslint -s node_modules/custom-tslint-formatters/formatters -t grouped -p .",
