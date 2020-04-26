@@ -13,7 +13,7 @@
     "systemjs": "^6.0.0"
   },
   "dependencies": {
-    "@alorel/rollup-plugin-index-renderer-core": "../core",
+    "@alorel/rollup-plugin-index-renderer-core": "workspace:*",
     "@types/node": ">=13.0.0"
   },
   "publishConfig": {
