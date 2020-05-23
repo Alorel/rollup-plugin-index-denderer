@@ -1,0 +1,22 @@
+{
+  "name": "@alorel/rollup-plugin-index-renderer-iife",
+  "version": "1.0.0",
+  "description": "Rollup plugin for rendering index.pug in iife format",
+  "main": "index.js",
+  "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
+  "author": "Arturas Molcanovas <a.molcanovas@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "rollup": "^2.6.0 || ^1.30.0"
+  },
+  "dependencies": {
+    "@alorel/rollup-plugin-index-renderer-core": "workspace:*",
+    "@types/node": ">=13.13.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/alorel"
+  }
+}

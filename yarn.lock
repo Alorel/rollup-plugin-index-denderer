@@ -26,6 +26,55 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alorel/rollup-plugin-index-renderer-core@workspace:*, @alorel/rollup-plugin-index-renderer-core@workspace:dist/core":
+  version: 0.0.0-use.local
+  resolution: "@alorel/rollup-plugin-index-renderer-core@workspace:dist/core"
+  dependencies:
+    "@types/node": ">=13.13.1"
+    "@types/pug": ^2.0.0
+    lazy-get-decorator: ^2.2.0
+    pug: ^2.0.4
+    tslib: ^1.11.1
+  peerDependencies:
+    rollup: ^2.6.0 || ^1.30.0
+  languageName: unknown
+  linkType: soft
+
+"@alorel/rollup-plugin-index-renderer-iife@workspace:dist/iife":
+  version: 0.0.0-use.local
+  resolution: "@alorel/rollup-plugin-index-renderer-iife@workspace:dist/iife"
+  dependencies:
+    "@alorel/rollup-plugin-index-renderer-core": "workspace:*"
+    "@types/node": ">=13.13.1"
+  peerDependencies:
+    rollup: ^2.6.0 || ^1.30.0
+  languageName: unknown
+  linkType: soft
+
+"@alorel/rollup-plugin-index-renderer-requirejs@workspace:dist/requirejs":
+  version: 0.0.0-use.local
+  resolution: "@alorel/rollup-plugin-index-renderer-requirejs@workspace:dist/requirejs"
+  dependencies:
+    "@alorel/rollup-plugin-index-renderer-core": "workspace:*"
+    "@types/node": ">=13.13.1"
+  peerDependencies:
+    requirejs: ^2.0.0
+    rollup: ^2.6.0 || ^1.30.0
+  languageName: unknown
+  linkType: soft
+
+"@alorel/rollup-plugin-index-renderer-systemjs@workspace:dist/systemjs":
+  version: 0.0.0-use.local
+  resolution: "@alorel/rollup-plugin-index-renderer-systemjs@workspace:dist/systemjs"
+  dependencies:
+    "@alorel/rollup-plugin-index-renderer-core": "workspace:*"
+    "@types/node": ">=13.13.1"
+  peerDependencies:
+    rollup: ^2.6.0 || ^1.30.0
+    systemjs: ^6.0.0
+  languageName: unknown
+  linkType: soft
+
 "@babel/code-frame@npm:^7.0.0":
   version: 7.8.3
   resolution: "@babel/code-frame@npm:7.8.3"
