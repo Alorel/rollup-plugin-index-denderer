@@ -1,7 +1,7 @@
 {
   "name": "index-renderer",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Rollup plugin for rendering index.pug",
   "main": "index.js",
   "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
