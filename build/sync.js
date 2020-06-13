@@ -9,7 +9,8 @@ const syncFields = [
   'repository',
   'author',
   'license',
-  'publishConfig'
+  'publishConfig',
+  'engines'
 ];
 
 const dependencyKeys = [

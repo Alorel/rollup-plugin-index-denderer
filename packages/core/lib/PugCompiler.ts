@@ -1,5 +1,5 @@
+import {promises as fs} from 'fs';
 import {compile, compileTemplate, Options} from 'pug';
-import {readFile} from './fs-async';
 
 /** @internal */
 export class PugCompiler {
@@ -15,7 +15,7 @@ export class PugCompiler {
       return Promise.resolve(this.compileFn);
     }
 
-    return readFile(this.input, 'utf8')
+    return fs.readFile(this.input, 'utf8')
       .then(contents => {
         this.needsRecompile = false;
         this.compileFn = compile(contents, {
