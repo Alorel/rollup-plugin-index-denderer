@@ -20,12 +20,17 @@ import {TagDefinition} from './TagDefinition';
 
 //tslint:disable:no-this-assignment
 
-export abstract class AbstractIndexRendererRuntime implements Required<IndexRendererOptions> {
+type IAbstractIndexRendererRuntime = Partial<Pick<IndexRendererOptions, 'entrypoint'>> &
+  Required<Omit<IndexRendererOptions, 'entrypoint'>>;
+
+export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRendererRuntime {
   public readonly base: string;
 
   public readonly dontLoadJs: RegExp[];
 
   public readonly emitBundleInfo: string;
+
+  public readonly entrypoint?: string | number;
 
   public readonly input: string;
 
@@ -35,11 +40,7 @@ export abstract class AbstractIndexRendererRuntime implements Required<IndexRend
 
   public readonly pugOptions: Omit<PugOptions, 'filename' | 'name'>;
 
-  protected inputChunk: string;
-
   protected loaderId: string;
-
-  protected templateAssetId: string;
 
   private compileFn: compileTemplate;
 
@@ -56,6 +57,7 @@ export abstract class AbstractIndexRendererRuntime implements Required<IndexRend
     this.pugOptions = options.pugOptions || {};
     this.dontLoadJs = options.dontLoadJs!;
     this.emitBundleInfo = options.emitBundleInfo!;
+    this.entrypoint = options.entrypoint;
 
     if (options.base) {
       this.base = options.base.endsWith('/') ? options.base : `${options.base}/`;
@@ -129,16 +131,22 @@ export abstract class AbstractIndexRendererRuntime implements Required<IndexRend
     };
   }
 
-  protected buildStart(ctx: PluginContext, {input}: InputOptions): void | Promise<void> {
-    if (typeof input !== 'string') {
-      ctx.error('rollup options\' input must be a string');
+  protected buildStart(ctx: PluginContext, {input: pluginInput}: InputOptions): Promise<void> {
+    let input: string;
+    if (!pluginInput) {
+      ctx.error('Input absent');
+    } else if (typeof pluginInput === 'string') {
+      input = pluginInput;
+    } else {
+      if (this.entrypoint === undefined) {
+        ctx.error('Must provide entrypoint option on non-string rollup input.');
+      }
 
-      return; //tslint:disable-line:return-undefined
+      input = pluginInput[this.entrypoint];
     }
 
-    this.inputChunk = input;
-    this.compiler = new PugCompiler(this.input, this.pugOptions);
-    ctx.addWatchFile(this.input);
+    this.compiler = new PugCompiler(input, this.pugOptions);
+    ctx.addWatchFile(input);
 
     return this.compiler.getCompileFn()
       .then(fn => {
@@ -229,6 +237,7 @@ export abstract class AbstractIndexRendererRuntime implements Required<IndexRend
   protected abstract resolveLoader(): string | Buffer;
 
   protected watchChange(id: string): void {
+
     if (id === this.input && this.compiler) {
       this.compiler.needsRecompile = true;
     }
