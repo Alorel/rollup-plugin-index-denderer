@@ -1,6 +1,6 @@
 import {join} from 'path';
 import * as fs from 'fs';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import {cleanPlugin} from '@alorel/rollup-plugin-clean';
 import {copyPkgJsonPlugin as copyPkgJson} from '@alorel/rollup-plugin-copy-pkg-json';
 import {dtsPlugin as dts} from '@alorel/rollup-plugin-dts';

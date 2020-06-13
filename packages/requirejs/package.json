@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@alorel/rollup-plugin-index-renderer-core": "workspace:*",
-    "@types/node": ">=13.13.1"
+    "@types/node": ">=12.0.0 <15.0.0"
   },
   "publishConfig": {
     "access": "public",
