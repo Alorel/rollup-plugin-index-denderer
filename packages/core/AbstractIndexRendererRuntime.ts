@@ -14,11 +14,13 @@ import {IndexPugLocals} from './IndexPugLocals';
 import {IndexRendererOptions} from './IndexRendererOptions';
 import {filterCss} from './lib/filterCss';
 import {filterEntryChunks} from './lib/filterEntryChunks';
-import {PugCompiler} from './lib/PugCompiler';
+import {PugLoader} from './lib/PugLoader';
 import {stringifyLocals} from './lib/stringifyLocals';
 import {TagDefinition} from './TagDefinition';
 
 //tslint:disable:no-this-assignment
+
+const _loader: unique symbol = Symbol('loader');
 
 type IAbstractIndexRendererRuntime = Partial<Pick<IndexRendererOptions, 'entrypoint'>> &
   Required<Omit<IndexRendererOptions, 'entrypoint'>>;
@@ -40,11 +42,9 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
 
   public readonly pugOptions: Omit<PugOptions, 'filename' | 'name'>;
 
+  protected compileFn: compileTemplate;
+
   protected loaderId: string;
-
-  private compileFn: compileTemplate;
-
-  private compiler: PugCompiler;
 
   public constructor(options: IndexRendererOptions) {
     if (!options.input) {
@@ -124,14 +124,11 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
       buildStart(this: PluginContext, inputOptions) {
         return self.buildStart(this, inputOptions);
       },
-      name: 'index-renderer-core',
-      watchChange(id): void {
-        self.watchChange(id);
-      }
+      name: 'index-renderer-core'
     };
   }
 
-  protected buildStart(ctx: PluginContext, {input: pluginInput}: InputOptions): Promise<void> {
+  protected buildStart(ctx: PluginContext, {input: pluginInput}: InputOptions): Promise<void> | void {
     let input: string;
     if (!pluginInput) {
       ctx.error('Input absent');
@@ -144,13 +141,21 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
 
       input = pluginInput[this.entrypoint];
     }
+    if (!this[_loader] || this[_loader].input !== this.input) {
+      this[_loader] = new PugLoader(this.pugOptions, this.input);
+    }
 
-    this.compiler = new PugCompiler(input, this.pugOptions);
     ctx.addWatchFile(input);
+    if (!this.outputFileName) {
+      return undefined;
+    }
 
-    return this.compiler.getCompileFn()
-      .then(fn => {
-        this.compileFn = fn;
+    return this[_loader].load()
+      .then(({compileFn, deps}) => {
+        this.compileFn = compileFn;
+        for (const d of deps) {
+          ctx.addWatchFile(d);
+        }
       });
   }
 
@@ -235,11 +240,4 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
   }
 
   protected abstract resolveLoader(): string | Buffer;
-
-  protected watchChange(id: string): void {
-
-    if (id === this.input && this.compiler) {
-      this.compiler.needsRecompile = true;
-    }
-  }
 }
