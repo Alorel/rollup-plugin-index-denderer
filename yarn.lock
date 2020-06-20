@@ -535,7 +535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=12.0.0 <15.0.0":
+"@types/node@npm:^14.0.13":
   version: 14.0.13
   resolution: "@types/node@npm:14.0.13"
   checksum: 2/2f2be6f7f1a916b0f4d58949bd934a8e41c0dcb15c493c17c3eaf78da3065c09650030f0dfe2e8c11880d597ee001d7cd925129218037fdb4432e80f7d895673
@@ -2807,7 +2807,7 @@ __metadata:
     "@semantic-release/git": ^9.0.0
     "@semantic-release/github": ^7.0.7
     "@semantic-release/npm": ^7.0.5
-    "@types/node": ">=12.0.0 <15.0.0"
+    "@types/node": ^14.0.13
     "@types/pug": ^2.0.4
     cross-spawn: ^7.0.3
     custom-tslint-formatters: ^2.4.0
@@ -2815,8 +2815,8 @@ __metadata:
     fs-extra: ^9.0.1
     glob: ^7.1.6
     lazy-get-decorator: ^2.2.0
-    pug: ^2.0.4 || ^3.0.0
-    rollup: ^2.16.1
+    pug: ^3.0.0
+    rollup: ^2.17.1
     rollup-plugin-typescript2: ^0.27.1
     semantic-release: ^17.0.8
     tslib: ^1.7.0 || ^2.0.0
@@ -5274,7 +5274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pug@npm:^2.0.4 || ^3.0.0":
+"pug@npm:^3.0.0":
   version: 3.0.0
   resolution: "pug@npm:3.0.0"
   dependencies:
@@ -5779,9 +5779,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.16.1":
-  version: 2.16.1
-  resolution: "rollup@npm:2.16.1"
+"rollup@npm:^2.17.1":
+  version: 2.17.1
+  resolution: "rollup@npm:2.17.1"
   dependencies:
     fsevents: ~2.1.2
   dependenciesMeta:
@@ -5789,7 +5789,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 2/da58b25b29339fd43d039278abd591efdc0129026dc2762205bf3fd711d105b7546715a32646b9247cf1adb46694d28cb2ac1d66c91c1c1ca27d87e1ac1a9d1f
+  checksum: 2/e43f9387e9297c7f00c6867e8d9547bf53a01642874745f7a2ddd61ca1a721b9ae5e94eae7b6da874dcae899c4f4dfd0fd45e5695d92a0e0d6d873262ccd3bb9
   languageName: node
   linkType: hard
 
