@@ -21,6 +21,7 @@ import {TagDefinition} from './TagDefinition';
 //tslint:disable:no-this-assignment
 
 const _loader: unique symbol = Symbol('loader');
+const _resolveEntrypoint: unique symbol = Symbol('resolveEntrypoint');
 
 type IAbstractIndexRendererRuntime = Partial<Pick<IndexRendererOptions, 'entrypoint'>> &
   Required<Omit<IndexRendererOptions, 'entrypoint'>>;
@@ -130,17 +131,12 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
 
   protected buildStart(ctx: PluginContext, {input: pluginInput}: InputOptions): Promise<void> | void {
     let input: string;
-    if (!pluginInput) {
-      ctx.error('Input absent');
-    } else if (typeof pluginInput === 'string') {
-      input = pluginInput;
-    } else {
-      if (this.entrypoint === undefined) {
-        ctx.error('Must provide entrypoint option on non-string rollup input.');
-      }
-
-      input = pluginInput[this.entrypoint];
+    try {
+      input = this[_resolveEntrypoint](pluginInput);
+    } catch (e) {
+      ctx.error(e.message);
     }
+
     if (!this[_loader] || this[_loader].input !== this.input) {
       this[_loader] = new PugLoader(this.pugOptions, this.input);
     }
@@ -240,4 +236,18 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
   }
 
   protected abstract resolveLoader(): string | Buffer;
+
+  private [_resolveEntrypoint](pluginInput: InputOptions['input']): string {
+    if (!pluginInput) {
+      throw new Error('Input absent');
+    } else if (typeof pluginInput === 'string') {
+      return pluginInput;
+    } else if (this.entrypoint !== undefined) {
+      return pluginInput[this.entrypoint];
+    } else if (Array.isArray(pluginInput) && pluginInput.length === 1) {
+      return pluginInput[0];
+    } else {
+      throw new Error('Must provide entrypoint option on non-string rollup input.');
+    }
+  }
 }
