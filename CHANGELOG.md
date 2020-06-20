@@ -1,3 +1,15 @@
+## [2.0.1](https://github.com/Alorel/rollup-plugin-index-denderer/compare/2.0.0...2.0.1) (2020-06-20)
+
+
+### Bug Fixes
+
+* **core:** Automatically resolve array entrypoint when length === 1 ([f44ba4e](https://github.com/Alorel/rollup-plugin-index-denderer/commit/f44ba4e9bf777a0b56d7283cb3ca05697a9adaab))
+
+
+### Maintenance
+
+* Update dependencies ([93a26c5](https://github.com/Alorel/rollup-plugin-index-denderer/commit/93a26c5f64977a301b19c9aed6b1cebe94a6dc89))
+
 # [2.0.0](https://github.com/Alorel/rollup-plugin-index-denderer/compare/1.1.0...2.0.0) (2020-06-14)
 
 

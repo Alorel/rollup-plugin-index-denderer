@@ -1,6 +1,6 @@
 {
   "name": "@alorel/rollup-plugin-index-renderer-core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Core of @alorel/rollup-plugin-index-renderer-* plugins",
   "main": "index.js",
   "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",
