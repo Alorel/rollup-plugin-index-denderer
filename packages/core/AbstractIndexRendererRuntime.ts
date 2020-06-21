@@ -47,6 +47,8 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
 
   protected loaderId: string;
 
+  private [_loader]: PugLoader;
+
   public constructor(options: IndexRendererOptions) {
     if (!options.input) {
       throw new Error(`Input absent`);
