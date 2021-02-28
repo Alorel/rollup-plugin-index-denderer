@@ -1,6 +1,6 @@
 {
   "name": "@alorel/rollup-plugin-index-renderer-iife",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Rollup plugin for rendering index.pug in iife format",
   "main": "index.js",
   "repository": "https://github.com/Alorel/rollup-plugin-index-denderer.git",

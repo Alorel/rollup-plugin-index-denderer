@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/Alorel/rollup-plugin-index-denderer/compare/2.0.1...2.1.0) (2021-02-28)
+
+
+### Features
+
+* Allow inlining css ([11e47bd](https://github.com/Alorel/rollup-plugin-index-denderer/commit/11e47bdc23a6cb1ccc4e245d842338ea213b1d9a))
+
+
+### Maintenance
+
+* **core:** Add missing loader property on AbstractIndexRendererRuntime ([38fc99b](https://github.com/Alorel/rollup-plugin-index-denderer/commit/38fc99bae409534502e48ededcf21e5ce81c0df3))
+* **package:** Update yarn ([fbe128d](https://github.com/Alorel/rollup-plugin-index-denderer/commit/fbe128dd19ca47e277903efbdbb1ce8803effc00))
+
 ## [2.0.1](https://github.com/Alorel/rollup-plugin-index-denderer/compare/2.0.0...2.0.1) (2020-06-20)
 
 
