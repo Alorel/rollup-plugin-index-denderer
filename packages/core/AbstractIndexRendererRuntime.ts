@@ -11,7 +11,7 @@ import {
   PluginContext
 } from 'rollup';
 import {IndexPugLocals} from './IndexPugLocals';
-import {IndexRendererOptions} from './IndexRendererOptions';
+import {IndexRendererOptions, InlineCssFn} from './IndexRendererOptions';
 import {filterCss} from './lib/filterCss';
 import {filterEntryChunks} from './lib/filterEntryChunks';
 import {PugLoader} from './lib/PugLoader';
@@ -23,8 +23,10 @@ import {TagDefinition} from './TagDefinition';
 const _loader: unique symbol = Symbol('loader');
 const _resolveEntrypoint: unique symbol = Symbol('resolveEntrypoint');
 
-type IAbstractIndexRendererRuntime = Partial<Pick<IndexRendererOptions, 'entrypoint'>> &
-  Required<Omit<IndexRendererOptions, 'entrypoint'>>;
+type Partials = 'entrypoint' | 'inlineCss';
+
+type IAbstractIndexRendererRuntime = Partial<Pick<IndexRendererOptions, Partials>> &
+  Required<Omit<IndexRendererOptions, Partials>>;
 
 export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRendererRuntime {
   public readonly base: string;
@@ -34,6 +36,8 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
   public readonly emitBundleInfo: string;
 
   public readonly entrypoint?: string | number;
+
+  public readonly inlineCss?: InlineCssFn;
 
   public readonly input: string;
 
@@ -55,6 +59,7 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
     }
 
     this.input = options.input;
+    this.inlineCss = options.inlineCss;
     this.loaderOutputName = options.loaderOutputName || this.getDefaultLoaderOutputName();
     this.outputFileName = options.outputFileName!;
     this.pugOptions = options.pugOptions || {};
@@ -157,12 +162,12 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
       });
   }
 
-  protected generateBundle(
+  protected async generateBundle(
     ctx: PluginContext,
     _opts: OutputOptions,
     bundle: OutputBundle,
     _isWrite: boolean
-  ): void | Promise<void> {
+  ): Promise<void> {
     const cssFiles: string[] = [];
     const jsFiles: TagDefinition[] = this.getInitialJsFiles(ctx, bundle);
     const locals: IndexPugLocals = {
@@ -170,6 +175,10 @@ export abstract class AbstractIndexRendererRuntime implements IAbstractIndexRend
       cssFiles,
       jsFiles
     };
+
+    if (this.inlineCss) {
+      locals.inlineCss = await this.inlineCss();
+    }
 
     const bundleArray = Object.values(bundle);
 

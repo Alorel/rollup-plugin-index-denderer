@@ -5,5 +5,7 @@ export interface IndexPugLocals {
 
   cssFiles: string[];
 
+  inlineCss?: string;
+
   jsFiles: TagDefinition[];
 }
